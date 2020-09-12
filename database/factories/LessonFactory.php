@@ -23,7 +23,11 @@ class LessonFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'teacher_id' => 2,
+            'student_id' => $this->faker->numberBetween($min = 3, $max = 10),
+            'lesson_date' => $this->faker->dateTimeThisYear($max = 'now', $timezone = null),
+            'subject' => $this->faker->realText($maxNbChars = 40),
+            'description' => $this->faker->realText($maxNbChars = 100),
         ];
     }
 }
