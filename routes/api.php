@@ -22,4 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('login', [UsersController::class, 'login']);
     Route::get('/users', [UsersController::class, 'index'])->name('users.index');
+    Route::get('/user/lessons', [UsersController::class, 'getLessons'])->name('users.lessons');
 });

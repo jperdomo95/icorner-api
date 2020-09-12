@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Auth, Hash};
-use App\Models\User;
+use App\Models\{User, Lesson};
+use App\Http\Resources\LessonCollection;
 
 class UsersController extends Controller
 {
@@ -75,6 +76,20 @@ class UsersController extends Controller
             return response([
                 'error' => 'The user you entered does not exist',
             ], 404);
+        }
+    }
+
+    public function getLessons(Request $request){
+        $lessons = new LessonCollection(Lesson::where('teacher_id', $request->teacher)->get());
+        if ($lessons->isNotEmpty()) {
+            // Authentication passed...
+            return response([
+                'lessons' => $lessons
+            ]);
+        } else {
+            return response([
+                'error' => 'You have not registered any lessons',
+            ], 204);
         }
     }
 }

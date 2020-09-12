@@ -57,4 +57,8 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function lessons(){
+        return $this->hasMany(Lesson::class, 'teacher_id');
+    }
 }
