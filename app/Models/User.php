@@ -58,7 +58,11 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function lessons(){
+    public function lessonsToGive(){
         return $this->hasMany(Lesson::class, 'teacher_id');
+    }
+
+    public function lessonsToTake(){
+        return $this->hasMany(Lesson::class, 'student_id');
     }
 }

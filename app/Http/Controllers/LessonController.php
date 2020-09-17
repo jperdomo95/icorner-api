@@ -26,7 +26,8 @@ class LessonController extends Controller
     public function store(Request $updateLessonRequest)
     {
         $lesson = Lesson::create([
-            "student_id" => $updateLessonRequest->teacher,
+            "student_id" => $updateLessonRequest->student,
+            "teach_id" => $updateLessonRequest->teacher,
             "lesson_date" => $updateLessonRequest->date,
             "subject" => $updateLessonRequest->subject,
             "description" => $updateLessonRequest->description
@@ -47,6 +48,7 @@ class LessonController extends Controller
     {
         $lesson->update([
             "student_id" => $updateLessonRequest->teacher,
+            "teacher_id" => $updateLessonRequest->teacher,
             "lesson_date" => $updateLessonRequest->date,
             "subject" => $updateLessonRequest->subject,
             "description" => $updateLessonRequest->description
