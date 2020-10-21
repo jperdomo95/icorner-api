@@ -18,8 +18,8 @@ class Lesson extends JsonResource
             'teacher' => $this->teacher_id,
             'student' => $this->student_id,
             'date' => $this->lesson_date,
-            'subject' => $this->subject,
-            'description' => $this->description,
+            'details' => $this->subject,
+            'label' => $this->description,
             'student' => User::collection($this->whenLoaded('student'))
         ]);
     }

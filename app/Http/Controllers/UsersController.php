@@ -69,11 +69,13 @@ class UsersController extends Controller
         if ($user && Hash::check($request->password, $user->password)) {
             // Authentication passed...
             return response([
-                'logged_in' => 'success',
+                'logged_in' => true,
+                'user' => $user,
                 'message'=> 'Welcome'
             ]);
         } else {
             return response([
+                'logged_in' => false,
                 'error' => 'The user you entered does not exist',
             ], 404);
         }
@@ -83,9 +85,7 @@ class UsersController extends Controller
         $lessons = new LessonCollection(Lesson::where('teacher_id', $request->teacher)->get());
         if ($lessons->isNotEmpty()) {
             // Authentication passed...
-            return response([
-                'lessons' => $lessons
-            ]);
+            return $lessons;
         } else {
             return response([
                 'error' => 'You have not registered any lessons',
