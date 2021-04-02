@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Lesson;
 use Illuminate\Http\Request;
+use Auth;
 
 class LessonController extends Controller
 {
@@ -26,9 +27,9 @@ class LessonController extends Controller
     public function store(Request $updateLessonRequest)
     {
         $lesson = Lesson::create([
-            "student_id" => $updateLessonRequest->student,
-            "teach_id" => $updateLessonRequest->teacher,
-            "lesson_date" => $updateLessonRequest->date,
+            "student_name" => $updateLessonRequest->studentName,
+            "teacher_id" => Auth::id(),
+            "lesson_date" => $updateLessonRequest->lessonDate,
             "subject" => $updateLessonRequest->subject,
             "description" => $updateLessonRequest->description
         ]);

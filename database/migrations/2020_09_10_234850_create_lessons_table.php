@@ -15,13 +15,12 @@ class CreateLessonsTable extends Migration
     {
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('teacher_id');
-            $table->unsignedBigInteger('student_id');
+            $table->unsignedBigInteger('teacher_id')->nullable();
+            $table->string('student_name')->nullable();
             $table->timestamp('lesson_date');
             $table->string('subject');
             $table->string('description');
             $table->foreign('teacher_id')->references('id')->on('users');
-            $table->foreign('student_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
