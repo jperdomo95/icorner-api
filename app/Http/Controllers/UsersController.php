@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Auth, Hash};
 use App\Models\{User, Lesson};
 use App\Http\Resources\LessonCollection;
+use App\Http\Requests\RegisterUserRequest;
 
 class UsersController extends Controller
 {
@@ -64,6 +65,22 @@ class UsersController extends Controller
         //
     }
 
+    public function register(RegisterUserRequest $request)
+    {
+        $user = User::create([
+            'email' => $request->email,
+            'name' => $request->name,
+            'username' => $request->username,
+            'cellphone' => $request->cellphone,
+            'password' => Hash::make($request->password)
+        ]);
+        return response()->json([
+            'logged_in' => true,
+            'user' => $user,
+            'message'=> 'Welcome'
+        ]);
+    }
+
     public function login(Request $request){
         $user = User::where('email', $request->email)->first();
         if ($user && Hash::check($request->password, $user->password)) {
@@ -82,7 +99,7 @@ class UsersController extends Controller
     }
 
     public function getLessons(Request $request){
-        $lessons = new LessonCollection(Lesson::where('teacher_id', $request->teacher)->get());
+        $lessons = new LessonCollection(Lesson::where('teacher_id', $request->teacher)->orderBy('lesson_start_date', 'desc')->take(10)->get());
         if ($lessons->isNotEmpty()) {
             // Authentication passed...
             return $lessons;
@@ -91,5 +108,10 @@ class UsersController extends Controller
                 'error' => 'You have not registered any lessons',
             ], 204);
         }
+    }
+
+    public function getRecentLessons(Request $request)
+    {
+        # code...
     }
 }

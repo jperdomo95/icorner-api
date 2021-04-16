@@ -24,8 +24,10 @@ class LessonFactory extends Factory
     {
         return [
             'teacher_id' => 2,
-            'student_name' => $this->faker->name(),
-            'lesson_date' => $this->faker->dateTimeThisYear($max = 'now', $timezone = null),
+            // 'student_id' => $this->faker->numberBetween($min = 3, $max = 13),
+            'student_name' => $this->faker->name,
+            'lesson_start_date' => $this->faker->dateTimeThisYear($max = 'now', $timezone = null),
+            'lesson_end_date' => $this->faker->dateTimeThisYear($max = 'now', $timezone = null),
             'subject' => $this->faker->realText($maxNbChars = 40),
             'description' => $this->faker->realText($maxNbChars = 100),
         ];

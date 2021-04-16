@@ -21,7 +21,8 @@ class UserSeeder extends Seeder
             'password' => bcrypt('J0estars'),
             'cellphone'=> '+584122566503',
             'cellphone_confirmed' => true,
-            'current_team_id' => 1
+            'current_team_id' => 1,
+            'is_teacher' => true,
         ]);
 
         User::create([
@@ -30,7 +31,8 @@ class UserSeeder extends Seeder
             'email'    => 'kragero@gmail.com',
             'password' => bcrypt('J0estars'),
             'cellphone' => '+58412256653',
-            'current_team_id' => 2
+            'current_team_id' => 2,
+            'is_teacher' => true
         ]);
 
         $team = Team::create([

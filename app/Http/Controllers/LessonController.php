@@ -27,11 +27,13 @@ class LessonController extends Controller
     public function store(Request $updateLessonRequest)
     {
         $lesson = Lesson::create([
-            "student_name" => $updateLessonRequest->studentName,
-            "teacher_id" => Auth::id(),
-            "lesson_date" => $updateLessonRequest->lessonDate,
-            "subject" => $updateLessonRequest->subject,
-            "description" => $updateLessonRequest->description
+            // "student_id" => 4,
+            "student_name" => $updateLessonRequest->lesson['studentName'],
+            "teacher_id" => $updateLessonRequest->teacher,
+            "lesson_start_date" => $updateLessonRequest->lesson['lessonStartDate'],
+            "lesson_end_date" => $updateLessonRequest->lesson['lessonEndDate'],
+            "subject" => $updateLessonRequest->lesson['subject'],
+            "description" => $updateLessonRequest->lesson['description']
         ]);
         return response([
             "message" => "Lesson created successfully"
@@ -48,11 +50,13 @@ class LessonController extends Controller
     public function update(Request $updateLessonRequest, Lesson $lesson)
     {
         $lesson->update([
-            "student_id" => $updateLessonRequest->teacher,
-            "teacher_id" => $updateLessonRequest->teacher,
-            "lesson_date" => $updateLessonRequest->date,
-            "subject" => $updateLessonRequest->subject,
-            "description" => $updateLessonRequest->description
+            // "student_id" => $updateLessonRequest->teacher,
+            "student_name" => $updateLessonRequest->lesson['studentName'],
+            "teacher_id" => $updateLessonRequest->lesson['teacher'],
+            "lesson_start_date" => $updateLessonRequest->lesson['lesssonStartDate'],
+            "lesson_end_date" => $updateLessonRequest->lesson['lesssonEndDate'],
+            "subject" => $updateLessonRequest->lesson['subject'],
+            "description" => $updateLessonRequest->lesson['description']
         ]);
         return response([
             "message" => "Lesson created successfully"

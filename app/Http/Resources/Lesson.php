@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Models\User as UserModel;
 
 class Lesson extends JsonResource
 {
@@ -14,13 +15,23 @@ class Lesson extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray([
-            'teacher' => $this->teacher_id,
-            'student' => $this->student_id,
-            'date' => $this->lesson_date,
-            'details' => $this->subject,
-            'label' => $this->description,
-            'student' => User::collection($this->whenLoaded('student'))
-        ]);
+        return [
+            'id' => $this->id,
+            'summary' => $this->subject,
+            'description' => $this->description,
+            // 'student' => $this->student_id,
+            'start' => [
+                'dateTime' => $this->lesson_start_date
+            ],
+            'end' => [
+                'dateTime' => $this->lesson_end_date
+            ],
+            // 'attendees' => [new User(UserModel::find($this->student_id))],
+            'attendees' => [
+                [
+                    'displayName' => $this->student_name
+                ]
+            ]
+        ];
     }
 }

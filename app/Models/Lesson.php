@@ -10,11 +10,12 @@ class Lesson extends Model
     use HasFactory;
 
     protected $casts = [
-        'created_at' => 'date:d/m/Y',
-      ];
+        'lesson_start_date' => 'datetime:U',
+        'lesson_end_date' => 'datetime:U'
+    ];
 
     protected $fillable = [
-        'teacher_id', 'student_name', 'lesson_date', 'subject', 'description'
+        'teacher_id', 'student_name', 'lesson_start_date', 'lesson_end_date', 'subject', 'description'
     ];
 
     public function student()

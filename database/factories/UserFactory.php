@@ -30,6 +30,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'username' => $name,
             'password' => bcrypt('1234'), // 1234
+            'is_teacher' => $this->faker->boolean(),
             'remember_token' => Str::random(10),
         ];
     }
