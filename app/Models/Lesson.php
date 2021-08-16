@@ -10,8 +10,8 @@ class Lesson extends Model
     use HasFactory;
 
     protected $casts = [
-        'lesson_start_date' => 'datetime:U',
-        'lesson_end_date' => 'datetime:U'
+        'lesson_start_date' => 'datetime:UTC',
+        'lesson_end_date' => 'datetime:UTC'
     ];
 
     protected $fillable = [

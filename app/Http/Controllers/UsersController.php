@@ -99,7 +99,7 @@ class UsersController extends Controller
     }
 
     public function getLessons(Request $request){
-        $lessons = new LessonCollection(Lesson::where('teacher_id', $request->teacher)->orderBy('lesson_start_date', 'desc')->take(10)->get());
+        $lessons = new LessonCollection(Lesson::where('teacher_id', $request->teacher)->get());
         if ($lessons->isNotEmpty()) {
             // Authentication passed...
             return $lessons;
